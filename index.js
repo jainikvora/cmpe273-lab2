@@ -3,15 +3,11 @@ var login = require('./login');
 
 var app = connect();
 
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var qs = require('qs');
+app.use(connect.json()); // Parse JSON request body into `request.body`
+app.use(connect.urlencoded({extended: true})); // Parse form in request body into `request.body`
+app.use(connect.cookieParser()); // Parse cookies in the request headers into `request.cookies`
+app.use(connect.query()); // Parse query string into `request.query`
 
-
-app.use(bodyParser.json()); // Parse JSON request body into `request.body`
-app.use(bodyParser.urlencoded({extended: true})); // Parse form in request body into `request.body`
-app.use(cookieParser()); // Parse cookies in the request headers into `request.cookies`
-//app.use(qs.query()); // Parse query string into `request.query`
 
 app.use('/', main);
 
